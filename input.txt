@@ -1,0 +1,4 @@
+Tuna 1
+Egg 2
+Ikura 5
+Tuna 2
