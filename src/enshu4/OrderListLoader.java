@@ -26,14 +26,14 @@ public class OrderListLoader {
 		try {
 			item = new HashMap <String, Integer>();
 			while((line = br.readLine()) != null) {
+				// skip if line is a empty line or a comment start with ';'
 				if ((line.isEmpty() 
 						|| line.trim().equals("") 
 						|| line.trim().equals("\n") 
-						|| line == "!") == false) {
+						|| line.substring(0,1).equals(";") ) == false) {
 					// trim head and tail of input
 					// split into first part with String key and second part ends with val
 					String[] splt = line.trim().split(" ");
-					
 					// get index of val in splt
 					int valPos = splt.length-1;
 					
@@ -44,7 +44,6 @@ public class OrderListLoader {
 					else 
 						item.put(splt[0], Integer.parseInt(splt[valPos]));
 				}
-					
 			}
 			br.close();
 		} catch(IOException e) {
