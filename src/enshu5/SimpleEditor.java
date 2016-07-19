@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class SimpleEditor {
 	private JTextArea ta = null;
@@ -73,7 +74,20 @@ public class SimpleEditor {
    			 
    		 }
    	 });
-   	 
+   	save.addActionListener(new ActionListener() {
+  		 public void actionPerformed(ActionEvent e) {
+  			 //read fileName
+  			 fname = fileName.getText();
+  			 
+  			 //write text into file
+  			 try (PrintWriter out = new PrintWriter(fname) ) {
+  				 out.print(ta.getText());
+  			 } catch(FileNotFoundException f) {
+    			System.out.println("Can not open " + fname);
+       			return;
+  			 }
+  		 }
+  	 });
    	 //set fileNameBar layout
    	 fileNameBar.setLayout(new BorderLayout());
    	 fileNameBar.add(load, BorderLayout.EAST);
@@ -89,5 +103,3 @@ public class SimpleEditor {
     }
 
 }
-
-

@@ -1,6 +1,4 @@
-Tuna     1
-
-; I like eggs
-    Egg     2
-  Ikura   5
-Tuna 2
+Tamago 2
+Maguro 1
+Ikura 5
+Huy
