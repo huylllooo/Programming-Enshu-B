@@ -16,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class SimpleEditor {
 	private JTextArea ta = null;
@@ -27,10 +26,12 @@ public class SimpleEditor {
    	 
    	 JPanel fileNameBar = new JPanel();
    	 ta = new JTextArea("Enter your text here");
-   	 
+   	 JButton save = new JButton("Save");
+   	 // set app's layout
    	 jf.setLayout(new BorderLayout());
    	 jf.add(fileNameBar, BorderLayout.NORTH);
    	 jf.add(new JScrollPane(ta), BorderLayout.CENTER);
+   	 jf.add(save, BorderLayout.SOUTH);
    	 
    	 JButton load = new JButton("Load");
    	 fileName = new JTextField("Enter your file name here");
@@ -73,9 +74,11 @@ public class SimpleEditor {
    		 }
    	 });
    	 
+   	 //set fileNameBar layout
    	 fileNameBar.setLayout(new BorderLayout());
    	 fileNameBar.add(load, BorderLayout.EAST);
    	 fileNameBar.add(fileName,BorderLayout.CENTER);
+   	 
    	 jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    	 jf.setSize(320, 240);
    	 jf.setVisible(true);
