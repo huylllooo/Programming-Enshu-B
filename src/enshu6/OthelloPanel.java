@@ -13,6 +13,7 @@ public class OthelloPanel extends JPanel{
 	private double boxW;
 	private double boxH;
 	private double cx =0, cy = 0;
+	boolean black = true;
 	public OthelloPanel() {
 		super();
 		this.setPreferredSize(new Dimension(440, 440));
@@ -23,16 +24,12 @@ public class OthelloPanel extends JPanel{
 			public void mouseEntered(MouseEvent e) {
 			}			
 			public void mouseExited(MouseEvent e) {
-				
 			}
 			
 			public void mousePressed(MouseEvent e) {
 				Point mp = e.getPoint();
 				Rectangle r = getBounds();
-				
-				System.out.println("mp=" + mp);
-				System.out.println("r=" + r);
-				
+								
 				if (r.width != 0 && r.height != 0) {
 					cx = (double) mp.x/ (double) r.width;
 					cy = (double) mp.y / (double) r.height;
@@ -40,17 +37,13 @@ public class OthelloPanel extends JPanel{
 					repaint();
 				}
 			}
-			
 			public void mouseReleased(MouseEvent e) {
-				
 			}
 		});
 	}
 	
 	public void paint(Graphics g) {
 		
-		// Delete when complete
-		System.out.println("GoPaint!");
 		// Clear drawing area
 		Rectangle r = this.getBounds();
 		boxW = r.width/11;
@@ -73,7 +66,18 @@ public class OthelloPanel extends JPanel{
 		g.setColor(Color.black);
 		int x = (int) (Math.floor((r.width * cx-boxW/2)/boxW) * boxW + boxW/2);
 		int y = (int) (Math.floor((r.height * cy-boxH/2)/boxH) * boxH + boxH/2);
-		if (cx!=0 && cy!=0)
-			g.fillOval(x, y,(int) (boxW),(int) (boxH));
+		if (cx!=0 && cy!=0
+			&& x < boxW*10.5
+			&& x >= boxW*0.5
+			&& y < boxH *10.5
+			&& y >= boxH*0.5)
+			if (black == true) {
+					g.fillOval(x, y,(int) (boxW),(int) (boxH));
+					black = false;
+				}
+			else{
+					g.drawOval(x, y,(int) (boxW),(int) (boxH));
+					black = true;
+			}
 	}
 }
