@@ -14,6 +14,7 @@ public class OthelloPanel extends JPanel{
 	private double boxH;
 	private double cx =0, cy = 0;
 	boolean black = true;
+	int[][] chessBoard = new int[10][10];
 	public OthelloPanel() {
 		super();
 		this.setPreferredSize(new Dimension(440, 440));
@@ -33,7 +34,6 @@ public class OthelloPanel extends JPanel{
 				if (r.width != 0 && r.height != 0) {
 					cx = (double) mp.x/ (double) r.width;
 					cy = (double) mp.y / (double) r.height;
-					System.out.printf("(cx.cy)=(%.2f,%.2f)\n\n",cx,cy);
 					repaint();
 				}
 			}
@@ -43,7 +43,7 @@ public class OthelloPanel extends JPanel{
 	}
 	
 	public void paint(Graphics g) {
-		
+		System.out.print("Hello");
 		// Clear drawing area
 		Rectangle r = this.getBounds();
 		boxW = r.width/11;
@@ -64,20 +64,28 @@ public class OthelloPanel extends JPanel{
 		
 		
 		g.setColor(Color.black);
-		int x = (int) (Math.floor((r.width * cx-boxW/2)/boxW) * boxW + boxW/2);
-		int y = (int) (Math.floor((r.height * cy-boxH/2)/boxH) * boxH + boxH/2);
-		if (cx!=0 && cy!=0
-			&& x < boxW*10.5
-			&& x >= boxW*0.5
-			&& y < boxH *10.5
-			&& y >= boxH*0.5)
-			if (black == true) {
-					g.fillOval(x, y,(int) (boxW),(int) (boxH));
+		int x = (int) (Math.floor((r.width * cx-boxW/2)/boxW));
+		System.out.println(x);
+		int y = (int) (Math.floor((r.height * cy-boxH/2)/boxH));
+		System.out.println(y);
+		if ( x<10 && y<10
+		   && x>=0 && y >=0) 
+			if (chessBoard[x][y] == 0)
+				if (black == true) {
+					chessBoard[x][y] = 1;
 					black = false;
-				}
-			else{
-					g.drawOval(x, y,(int) (boxW),(int) (boxH));
+				} else {
+					chessBoard[x][y] = 2;
 					black = true;
+				}
+		System.out.println("&^%^&$");
+		for (int i = 0; i<10; i++) 
+			for (int j = 0; j<10; j++) {
+				System.out.print(chessBoard[i][j] + "-");
+				if (chessBoard[i][j] == 1)
+					g.fillOval((int)(i * boxW + boxW/2), (int)(j * boxH + boxH/2),(int) (boxW),(int) (boxH));
+				else if (chessBoard[i][j] == 2)
+					g.drawOval((int)(i * boxW + boxW/2), (int)(j * boxH + boxH/2),(int) (boxW),(int) (boxH));
 			}
 	}
 }
