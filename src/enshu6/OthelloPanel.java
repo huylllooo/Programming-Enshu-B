@@ -9,37 +9,33 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 public class OthelloPanel extends JPanel{
+	private double boxW;
+	private double boxH;
 	public OthelloPanel() {
 		super();
-		this.setPreferredSize(new Dimension(640, 480));
+		this.setPreferredSize(new Dimension(440, 440));
 	}
 	
 	public void paint(Graphics g) {
+		
+		// Delete when complete
 		System.out.println("GoPaint!");
 		// Clear drawing area
 		Rectangle r = this.getBounds();
-		g.setColor(Color.white);
+		boxW = r.width/11;
+		boxH = r.height/11;
+		g.setColor(Color.green);
 		g.fillRect(r.x, r.y, r.width, r.height);
 	
 		// Line
-		g.setColor(Color.blue);
-		for (int i = 0; i<= 300; i += 10) {
-			g.drawLine(0, 0, i, 100);
+		g.setColor(Color.black);
+		// vertical lines
+		for (int i = 0; i< 11; i++) {
+			g.drawLine((int) (boxW*(i+0.5)), (int) (boxH*0.5), (int) (boxW*(i+0.5)), (int) (boxH*10.5));
 		}
-		// Rect
-		g.setColor(Color.red);
-		g.drawRect(0, 100, 300, 50);
-		g.fillRect(0, 150, 300, 50);
-		
-		// Oval 
-		g.setColor(Color.green);
-		g.drawOval(0, 200, 300, 50);
-		g.fillOval(0, 250, 300, 50);
-		
-		// String
-		g.setColor(new Color(0, 128, 255));
-		Font f = new Font("", Font.PLAIN, 50);
-		g.setFont(f);
-		g.drawString("This is a String", 100, 100);
+		// horizontal lines
+		for (int i = 0; i< 11; i++) {
+			g.drawLine((int) (boxW*0.5), (int) (boxH*(i+0.5)), (int) (boxW*10.5), (int) (boxH*(i+0.5)));
+		}
 	}
 }
